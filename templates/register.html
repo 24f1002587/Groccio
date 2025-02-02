@@ -1,0 +1,46 @@
+{%extends 'layout.html'%} {# Comments #} {%block title%} Register - Groccrio
+{%endblock%} {%block content%}
+<h1>Register</h1>
+<form method="post" class="mt-5 d-flex align-items-center">
+  
+  <label for="username" class="form-label w-100"
+    >Username:
+    <input class="form-control" type="text" name="username" id="username" required/>
+  </label>
+  <br />
+   <label class="form-label w-100" for="password"
+    >Password:
+    <input class="form-control" type="password" name="password" id="password" required/>
+  </label>
+   <br /> 
+   <label class="form-label w-100" for="name"
+    >Name:
+    <input class="form-control" type="name" name="name" id="name"/>
+  </label>
+  <input type="submit" value="Register" class="btn btn-success mt-5 w-50" />
+</form>
+{%endblock%} {%block style%}
+<style>
+  body {
+    background-color: #eeeeee;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  h1 {
+    margin-top: 64px;
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 30px;
+  }
+</style>
+{%endblock%}

@@ -1,0 +1,54 @@
+<nav class="navbar">
+  <div class="container-fluid py-2">
+    <form action="" class="d-flex align-items-center w-100">
+      <div class="mb-3 w-100 d-flex flex-row justify-content-around gap-4">
+        <select name="parameter" id="parameter" class="form-select">
+          {% for param in parameters %} {% if param == parameter %}
+          <option value="{{param}}" selected>{{parameters[param]}}</option>
+          {% else %}
+          <option value="{{param}}">{{parameters[param]}}</option>
+          {% endif %} {% endfor %}
+        </select>
+        <input
+          name="query"
+          id="query"
+          class="form-control"
+          type="text"
+          placeholder="Search Query"
+          value="{{query}}"
+        />
+        <button
+          type="button"
+          onclick="clearSearch()"
+          id="clear"
+          class="btn btn-outline-danger clear-button"
+        >
+          <i class="fas fa-backspace fa-xs"></i>
+          Clear
+        </button>
+        <button type="submit" id="submit" class="btn btn-outline-primary">
+          <i class="fas fa-search"></i>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<style>
+  #parameter {
+    width: 20%;
+  }
+  #submit {
+    width: 15%;
+  }
+  #clear {
+    width: 10%;
+  }
+</style>
+
+<script>
+  function clearSearch() {
+    window.location.href = window.location.href.split("?")[0];
+  }
+</script>

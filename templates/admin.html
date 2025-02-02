@@ -1,0 +1,82 @@
+{% extends 'layout.html' %} {% block title %} Admin - Groccrio {% endblock %} {%
+block content %}
+<h1>Admin Dashboard</h1>
+<div class="d-flex justify-content-between w-75">
+  <h2 class="text-muted">Categories</h2>
+  <a
+    class="btn btn-success px-4 d-flex align-items-center justify-content-center"
+    href="{{url_for('add_category')}}"
+  >
+    <span class="">
+      <i class="fas fa-plus fa-xs"></i>
+      Add
+    </span>
+  </a>
+</div>
+<table class="table mt-5 w-75">
+  <thead>
+    <tr>
+      <th>Category Id</th>
+      <th>Category Name</th>
+      <th>Number of Products</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category in categories %}
+    <tr>
+      <td>{{category.id}}</td>
+      <td>{{category.name}}</td>
+      <td>{{category.products|length}}</td>
+      <td class="">
+        <a
+          href="{{url_for('show_category', id = category.id)}}"
+          class="btn btn-outline-success btn-sm"
+        >
+          <i class="fas fa-search"></i>
+
+          Show
+        </a>
+        <a
+          href="{{url_for('edit_category', id=category.id)}}"
+          class="btn btn-primary btn-sm"
+          ><i class="fas fa-edit fa-xs"></i> Edit</a
+        >
+        <a
+          href="{{url_for('delete_category', id=category.id)}}"
+          class="btn btn-danger btn-sm"
+          ><i class="fas fa-trash fa-xs"></i> Delete</a
+        >
+      </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+{%endblock %} {% block style %}
+<style>
+  body {
+    background-color: #eeeeee;
+  }
+  h1 {
+    margin-top: 64px;
+  }
+  h3 {
+    margin: 20px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 30px;
+  }
+</style>
+{% endblock %}

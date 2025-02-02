@@ -1,0 +1,43 @@
+{% extends 'layout.html' %} {% block title %} Add Category - Groccrio {%
+endblock %} {% block content %}
+<h1>Add Category</h1>
+<form
+  action=""
+  method="post"
+  class="mt-5 d-flex align-items-end justify-content-around flex-row w-75"
+>
+  <label for="name" class="w-50 form-label p-0 m-0"
+    >Name
+    <input type="text" name="name" id="name" class="form-control" required />
+  </label>
+
+  <input type="submit" value="Add Category" class="btn btn-success" />
+</form>
+
+{% endblock %} {% block style %}
+<style>
+  body {
+    background-color: #eeeeee;
+  }
+  h1 {
+    margin-top: 64px;
+  }
+  h3 {
+    margin: 20px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 30px;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %} {% block title %} Delete Product - Groccrio {%
+endblock %} {% block content %}
+<h1>Delete Product</h1>
+<h3 class="text-center text-danger mt-4">
+  Are you sure you want to delete product(<strong class="text-black"
+    >{{product.name}}</strong
+  >)?
+</h3>
+<form
+  method="post"
+  class="d-flex align-items-end justify-content-around flex-row w-75"
+>
+  <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
+
+{% endblock %} {% block style %}
+<style>
+  body {
+    background-color: #eeeeee;
+  }
+  h1 {
+    margin-top: 64px;
+  }
+  h3 {
+    margin: 20px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 30px;
+  }
+</style>
+{% endblock %}

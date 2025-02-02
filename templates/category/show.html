@@ -1,0 +1,82 @@
+{% extends 'layout.html' %} {% block title %} Admin - Groccrio {% endblock %} {%
+block content %}
+<h1>Products of {{category.name}} - Groccrio</h1>
+<div class="d-flex justify-content-between w-75 mt-3">
+  <h2 class="text-muted">Products</h2>
+  <h6 class="text-muted">
+    <em>Showing products of Category {{category.name}} only</em>
+  </h6>
+  <a
+    class="btn btn-success px-4 d-flex align-items-center justify-content-center"
+    href="{{url_for('add_product',category_id = category.id)}}"
+  >
+    <span class="">
+      <i class="fas fa-plus fa-xs"></i>
+      Add
+    </span>
+  </a>
+</div>
+<table class="table mt-5 w-75">
+  <thead>
+    <tr>
+      <th>Product Id</th>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Manufacture Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %} {% if product.category_id == category.id %}
+
+    <tr>
+      <td>{{product.id}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.man_date}}</td>
+      <td class="">
+        <a
+          href="{{url_for('edit_product', id=product.id)}}"
+          class="btn btn-primary btn-sm"
+          ><i class="fas fa-edit fa-xs"></i> Edit</a
+        >
+        <a
+          href="{{url_for('delete_product', id=product.id)}}"
+          class="btn btn-danger btn-sm"
+          ><i class="fas fa-trash fa-xs"></i> Delete</a
+        >
+      </td>
+    </tr>
+    {% endif %} {%endfor%}
+  </tbody>
+</table>
+
+{%endblock %} {% block style %}
+<style>
+  body {
+    background-color: #eeeeee;
+  }
+  h1 {
+    margin-top: 64px;
+  }
+  h3 {
+    margin: 20px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 30px;
+  }
+</style>
+{% endblock %}

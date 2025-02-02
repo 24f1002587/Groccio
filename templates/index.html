@@ -1,0 +1,196 @@
+{%extends 'layout.html'%} {%block title %} Home - Groccrio {%endblock%} {%block
+content %} {%include 'searchbar.html' with context %}
+<div class="categories-list">
+  {% for category in categories %}
+  <div class="category">
+    <h3>{{category.name}}</h3>
+    <div class="product-list">
+      {%for product in category.products %} {% if (price and product.price <=
+      price) or (name and name.lower() in product.name.lower()) or (not price
+      and not name) %}
+      <div class="product">
+        <div class="product-info">
+          <h4>{{product.name}}</h4>
+          <p>&#8377;{{product.price}}</p>
+          <p>Available: {{product.quantity}}</p>
+          {% if product.quantity > 0 %}
+
+          <div class="add-to-cart">
+            <form
+              action="{{url_for('add_to_cart', product_id=product.id)}}"
+              class="product-quantity"
+              method="post"
+            >
+              <label for="quantity" class="form-label">Quantity </label>
+
+              <div class="quantity">
+                <button
+                  onclick="decreaseQty({{product.id}})"
+                  type="button"
+                  class="btn btn-outline-danger"
+                >
+                  <i class="fas fa-minus fa-xs"></i>
+                </button>
+                <input
+                  type="number"
+                  name="quantity"
+                  id="quantity"
+                  value="1"
+                  min="1"
+                  max="{{product.quantity}}"
+                  class="form-control quantity-input-{{product.id}}"
+                />
+                <button
+                  onclick="increaseQty({{product.id}}, {{product.quantity}})"
+                  type="button"
+                  class="btn btn-outline-success"
+                >
+                  <i class="fas fa-plus fa-xs"></i>
+                </button>
+              </div>
+              <div class="w-100 d-flex justify-content-center">
+                <button
+                  type="submit"
+                  class="btn btn-success add-to-cart-button"
+                >
+                  <i class="fas fa-cart-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </form>
+          </div>
+          {% else %}
+          <button type="button" class="btn btn-outline-danger" disabled>
+            <i class="fas fa-times"></i>
+            Out of Stock
+          </button>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %} {%endfor%}
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%} {% block style %}
+
+<style>
+  .categories-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  .category {
+    width: 100;
+    margin: 32px 0;
+  }
+
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+  }
+
+  .product {
+    width: 300px;
+    margin: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-ifo h4 {
+    margin: 0;
+  }
+
+  .add-to-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .add-to-cart-button {
+    width: 70%;
+    margin-top: 16px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: none;
+    background-color: #0d6efd;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .add-to-cart button:hover {
+    background-color: #0b5ed7;
+  }
+
+  .add-to-cart button:active {
+    background-color: #0a58c2;
+  }
+
+  .add-to-cart button:focus {
+    outline: none;
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .product-quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  .product-quantity label {
+    margin-right: 8px;
+  }
+
+  .product-quantity input {
+    text-align: center;
+    -moz-appearance: textfield;
+    margin: 0 10px;
+  }
+
+  .product-quantity input::-webkit-outer-spin-botton,
+  .product-quantity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
+
+{% endblock %} {% block script %}
+
+<script>
+  function increaseQty(id, maxQty) {
+    var quantity = document.querySelector(".quantity-input-" + id);
+    if (quantity.value < maxQty) {
+      quantity.value = parseInt(quantity.value) + 1;
+    }
+  }
+  function decreaseQty(id) {
+    var quantity = document.querySelector(".quantity-input-" + id);
+    if (quantity.value > 1) {
+      quantity.value = parseInt(quantity.value) - 1;
+      console.log(quantity.value);
+    }
+  }
+</script>
+
+{% endblock %}
